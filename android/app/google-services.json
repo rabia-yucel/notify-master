@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "356778659750",
+    "project_id": "direct-notify",
+    "storage_bucket": "direct-notify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356778659750:android:1f319793fe8e5211b70967",
+        "android_client_info": {
+          "package_name": "notify.com.notify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356778659750-9p9pieh8em8ibmpmd6fta7s037vtjguj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUB2bD9rkI9wLWcjxaQ5sz7taXsEp4y9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356778659750-9p9pieh8em8ibmpmd6fta7s037vtjguj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "356778659750-nt32pms0ij8km7jvfj1fml93t6d0liep.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.direct-notify.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
