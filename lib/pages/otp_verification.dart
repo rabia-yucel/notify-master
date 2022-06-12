@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/service/session_data_manager.dart';
-import 'package:notify/utils/constant.dart';
-import 'package:notify/widgets/app_bar.dart';
-import 'package:notify/widgets/pressedwidget.dart';
+
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../service/session_data_manager.dart';
+import '../utils/constant.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/pressedwidget.dart';
 
 class OTPVerification extends StatefulWidget {
   const OTPVerification({Key? key}) : super(key: key);

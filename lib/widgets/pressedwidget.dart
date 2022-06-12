@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notify/utils/constant.dart';
+
+import '../utils/constant.dart';
+
 
 customButton(text, function) {
   return SizedBox(

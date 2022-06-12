@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notify/pages/settings/settings.dart';
-import 'package:notify/utils/constant.dart';
+
+import '../pages/settings/settings.dart';
+import '../utils/constant.dart';
+
 
 getAppBar(text) {
   return AppBar(

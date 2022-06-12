@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:notify/utils/constant.dart';
+
+import '../utils/constant.dart';
+
 
 Widget numberInput(hintText, TextEditingController controller) {
   return TextField(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:direct/service/session_data_manager.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:notify/service/session_data_manager.dart';
+
 
 class NotificationDataManager {
   static final NotificationDataManager _singleton = NotificationDataManager._internal();

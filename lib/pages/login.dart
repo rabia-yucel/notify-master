@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notify/pages/otp_verification.dart';
-import 'package:notify/service/session_data_manager.dart';
-import 'package:notify/utils/constant.dart';
-import 'package:notify/widgets/app_bar.dart';
-import 'package:notify/widgets/inputwidget.dart';
-import 'package:notify/widgets/pressedwidget.dart';
 
+import '../service/session_data_manager.dart';
+import '../utils/constant.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/inputwidget.dart';
+import '../widgets/pressedwidget.dart';
 import 'dashboard/dashboard.dart';
+import 'otp_verification.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

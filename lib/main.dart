@@ -1,3 +1,6 @@
+import 'package:direct/pages/dashboard/dashboard.dart';
+import 'package:direct/pages/login.dart';
+import 'package:direct/pages/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
@@ -5,13 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notify/pages/dashboard/dashboard.dart';
-import 'package:notify/pages/login.dart';
-import 'package:notify/pages/splash.dart';
-import 'package:notify/service/notification_data_manager.dart';
+
 
 
 import 'firebase_options.dart';
+import 'service/notification_data_manager.dart';
 
 /*
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

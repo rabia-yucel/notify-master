@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notify/pages/Insurance/InsurancePage.dart';
-import 'package:notify/utils/constant.dart';
 
+import '../../utils/constant.dart';
+import '../Barcode/BarcodePage.dart';
+import '../Insurance/InsurancePage.dart';
 import 'HomePage.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   List pages =[
     const HomePage(),
     const InsurancePage(),
-    //const SearchPage(),
+    const BarcodePage(),
     //const MyPage(),
   ];
 
@@ -48,7 +49,7 @@ class _MainPageState extends State<MainPage> {
         items: const [
           BottomNavigationBarItem(label: ("Home") ,icon: Icon(Icons.home)),
           BottomNavigationBarItem(label: ("Insurance") ,icon: Icon(Icons.work)),
-          //BottomNavigationBarItem(label: ("Search") ,icon: Icon(Icons.search)),
+          BottomNavigationBarItem(label: ("Qr Scan") ,icon: Icon(Icons.search)),
           //BottomNavigationBarItem(label: ("MyPage") ,icon: Icon(Icons.person)),
         ],
       ),

@@ -9,6 +9,7 @@ class DashboardNotificationsModel {
   String messageText;
   bool isRead;
   bool isDeleted;
+ // int id;
 
   DashboardNotificationsModel({
     required this.messageId,
@@ -19,6 +20,7 @@ class DashboardNotificationsModel {
     required this.messageText,
     required this.isRead,
     required this.isDeleted,
+   // required this.id,
   });
 }
 

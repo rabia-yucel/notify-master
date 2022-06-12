@@ -107,6 +107,7 @@ class _HomePageState extends State<HomePage> {
 
             DashboardNotificationsModel dashboardNotificationsModel =
             DashboardNotificationsModel(
+             // id: docUN['id'],
               messageId: docUN['message_id'],
               avatar: docNM['avatar'],
               name: docNM['title'],

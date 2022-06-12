@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-import 'package:notify/service/session_data_manager.dart';
-import 'package:notify/utils/constant.dart';
-import 'package:notify/widgets/app_bar.dart';
+
 
 import '../../service/notification_data_manager.dart';
+import '../../service/session_data_manager.dart';
+import '../../utils/constant.dart';
+import '../../widgets/app_bar.dart';
 import '../login.dart';
 import 'package:get/get.dart';
 
