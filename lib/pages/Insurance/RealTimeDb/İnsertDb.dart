@@ -23,11 +23,6 @@ class RealTimeDbInsert extends StatefulWidget {
 
 Future<DataPostModel?> submitdata(String plateNumber, String finCode, String carCertificateCode, String mobilePhone, String email) async{
 
-
-  //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
-  //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
-
-
   var response = await http.post(Uri.parse("https://iwork.btarge.com/api/AccountApi/CreateInsuranceContract"),
       headers: {
         "Content-Type": "application/json",

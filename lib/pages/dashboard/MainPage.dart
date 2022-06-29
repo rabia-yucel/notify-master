@@ -1,4 +1,6 @@
+import 'package:direct/pages/ScanPhoto/ScanPhotoPage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/constant.dart';
 import '../Barcode/BarcodePage.dart';
@@ -17,6 +19,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const InsurancePage(),
     const BarcodePage(),
+    const ScanPhotoPage(),
     //const MyPage(),
   ];
 
@@ -42,6 +45,8 @@ class _MainPageState extends State<MainPage> {
         currentIndex: currentIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(0.5),
+        selectedLabelStyle: GoogleFonts.oswald(),
+
         //showSelectedLabels: true,
        // showUnselectedLabels: true,
         elevation: 0,
@@ -50,6 +55,7 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(label: ("Home") ,icon: Icon(Icons.home)),
           BottomNavigationBarItem(label: ("Insurance") ,icon: Icon(Icons.work)),
           BottomNavigationBarItem(label: ("Qr Scan") ,icon: Icon(Icons.search)),
+          BottomNavigationBarItem(label: ("Photo Scan") ,icon: Icon(Icons.camera), ),
           //BottomNavigationBarItem(label: ("MyPage") ,icon: Icon(Icons.person)),
         ],
       ),
