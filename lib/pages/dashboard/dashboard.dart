@@ -25,12 +25,13 @@ class _DashboardState extends State<Dashboard> {
   @override
 
 
-
+//getAppBar3('Dashboard'),
   Widget build(BuildContext context) {
 
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: getAppBar3('Dashboard'),
+
       body: getBody(context),
     );
   }

@@ -7,6 +7,7 @@ class SessionDataManager {
   static String _userId = '';
   static bool _allowBankNotifications = true;
   static bool _allowMerchantNotifications = true;
+  static bool _allowDataNotifications = true;
 
   static String getPhoneNumber() {
     return _phoneNumber;
@@ -46,6 +47,12 @@ class SessionDataManager {
 
   static setAllowMerchantNotifications(value) {
     _allowMerchantNotifications = value;
+  }
+  static bool getAllowDataNotifications() {
+    return _allowDataNotifications;
+  }
+  static setAllowDataNotifications(value) {
+    _allowDataNotifications = value;
   }
 
 

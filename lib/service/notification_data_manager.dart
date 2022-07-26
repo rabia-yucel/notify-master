@@ -47,6 +47,7 @@ class NotificationDataManager {
   static Future<void> subscribeToAllTopics() async {
     await FirebaseMessaging.instance.subscribeToTopic('bank');
     await FirebaseMessaging.instance.subscribeToTopic('merchant');
+    await FirebaseMessaging.instance.subscribeToTopic('data');
   }
 
   static Future<void> subscribeToTopic(String topic) async {
