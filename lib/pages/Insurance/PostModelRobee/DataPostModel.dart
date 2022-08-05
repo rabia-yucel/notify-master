@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-
+ import 'dart:convert';
 
 DataPostModel dataPostModelFromJson(String str) => DataPostModel.fromJson(json.decode(str));
 

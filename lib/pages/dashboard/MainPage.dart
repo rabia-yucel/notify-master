@@ -1,10 +1,9 @@
-import 'package:direct/pages/ScanPhoto/ScanPhotoPage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:notify/pages/Insurance/InsurancePage.dart';
+import 'package:notify/utils/constant.dart';
 
-import '../../utils/constant.dart';
 import '../Barcode/BarcodePage.dart';
-import '../Insurance/InsurancePage.dart';
+import '../ScanPhoto/ScanPhotoPage.dart';
 import 'HomePage.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,9 +16,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages =[
     const HomePage(),
-    const InsurancePage(),
+   const InsurancePage(),
     const BarcodePage(),
     const ScanPhotoPage(),
+    //const SearchPage(),
     //const MyPage(),
   ];
 
@@ -45,8 +45,6 @@ class _MainPageState extends State<MainPage> {
         currentIndex: currentIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(0.5),
-        selectedLabelStyle: GoogleFonts.oswald(),
-
         //showSelectedLabels: true,
        // showUnselectedLabels: true,
         elevation: 0,
@@ -55,7 +53,8 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(label: ("Home") ,icon: Icon(Icons.home)),
           BottomNavigationBarItem(label: ("Insurance") ,icon: Icon(Icons.work)),
           BottomNavigationBarItem(label: ("Qr Scan") ,icon: Icon(Icons.search)),
-          BottomNavigationBarItem(label: ("Photo Scan") ,icon: Icon(Icons.camera), ),
+          BottomNavigationBarItem(label: ("Photo Scan") ,icon: Icon(Icons.camera)),
+          //BottomNavigationBarItem(label: ("Search") ,icon: Icon(Icons.search)),
           //BottomNavigationBarItem(label: ("MyPage") ,icon: Icon(Icons.person)),
         ],
       ),

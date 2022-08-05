@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../utils/constant.dart';
-
+import 'package:notify/utils/constant.dart';
 
 popUpText(BuildContext context, String popUpText) {
   showDialog(

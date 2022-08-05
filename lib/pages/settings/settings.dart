@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-
+import 'package:notify/service/session_data_manager.dart';
+import 'package:notify/utils/constant.dart';
+import 'package:notify/widgets/app_bar.dart';
 
 import '../../service/notification_data_manager.dart';
-import '../../service/session_data_manager.dart';
-import '../../utils/constant.dart';
-import '../../widgets/app_bar.dart';
 import '../login.dart';
 import 'package:get/get.dart';
 
 import 'GetXSwitchState.dart';
 import 'GetXSwitchState2.dart';
+import 'GetXSwitchState3.dart';
 
 
 
@@ -31,9 +31,11 @@ class _SettingsState extends State<Settings> {
 
   final GetXSwitchState getXSwitchStateBank = Get.put(GetXSwitchState());
   final GetXSwitchState2 getXSwitchStateMerchant = Get.put(GetXSwitchState2());
+  final GetXSwitchState3 getXSwitchStateData = Get.put(GetXSwitchState3());
 
   bool allowBankNotifications = SessionDataManager.getAllowBankNotifications();
   bool allowMerchantNotifications = SessionDataManager.getAllowMerchantNotifications();
+  bool allowDataNotifications = SessionDataManager.getAllowDataNotifications();
 
   @override
   Widget build(BuildContext context) {
@@ -181,17 +183,7 @@ class _SettingsState extends State<Settings> {
 
 
 
-                            ListTile(
-                              onTap: () async {
-                                await FirebaseAuth.instance.signOut();
-                                Get.to(() => const Login());
-                              },
-                              leading: const Icon(Icons.logout_outlined, color: primaryColor),
-                              title: Text(
-                                'Logout',
-                                style: textStyle2,
-                              ),
-                            ),
+
 
 
 
@@ -205,6 +197,88 @@ class _SettingsState extends State<Settings> {
 
                     ),
                   ],
+                ),
+              ),
+               // test ucun filter data button
+               Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Column(
+                  children: [
+                    GetBuilder<GetXSwitchState>(builder: (_) =>
+
+                        Column(
+                          children: [
+                            const SizedBox(height: 20,),
+                            ListTile(
+                              onTap: () { },
+                              leading: const Icon(CupertinoIcons.alarm, color: primaryColor),
+                              title: Text(
+                                'Data',
+                                style: textStyle2,
+                              ),
+                              trailing: SizedBox(
+                                width: 40,
+                                child: Transform.scale(
+                                  scale: 0.8,
+                                  child: CupertinoSwitch(
+                                    trackColor: Colors.grey[300],
+                                    activeColor: primaryColor,
+                                    value: allowDataNotifications && getXSwitchStateData.isSwitcheded,
+                                    onChanged: (value) {
+
+                                      getXSwitchStateData.changeSwitchState3(value);
+
+                                      setState(() {
+
+                                        allowDataNotifications = value;
+
+
+                                        SessionDataManager.setAllowBankNotifications(allowDataNotifications );
+
+                                        CollectionReference userInfo = FirebaseFirestore.instance.collection('user_info');
+                                        userInfo.doc(SessionDataManager.getUserId()).update({'allow_data_notifications': allowDataNotifications })
+                                            .then((value) => ("filter updated"))
+                                            .catchError((error) => ("Failed to update setting: $error"));
+
+                                        if (allowDataNotifications) {
+                                          NotificationDataManager.subscribeToTopic('data');
+                                        } else {
+                                          NotificationDataManager.unsubscribeFromTopic('data');
+                                        }
+
+                                      });
+                                    },
+
+                                  ),
+
+                                ),
+
+                              ),
+
+                            ),
+
+
+                          ],
+                        )
+
+
+
+
+
+
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Get.to(() => const Login());
+                },
+                leading: const Icon(Icons.logout_outlined, color: primaryColor),
+                title: Text(
+                  'Logout',
+                  style: textStyle2,
                 ),
               ),
 

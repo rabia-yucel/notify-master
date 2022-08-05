@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
+import 'package:notify/pages/login.dart';
+import 'package:notify/utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../utils/constant.dart';
-import 'login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:notify/utils/constant.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../utils/constant.dart';
 import '../PostModelRobee/DataPostModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -22,6 +22,11 @@ class RealTimeDbInsert extends StatefulWidget {
 }
 
 Future<DataPostModel?> submitdata(String plateNumber, String finCode, String carCertificateCode, String mobilePhone, String email) async{
+
+
+  //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
+  //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
+
 
   var response = await http.post(Uri.parse("https://iwork.btarge.com/api/AccountApi/CreateInsuranceContract"),
       headers: {
@@ -60,6 +65,7 @@ Future<DataPostModel?> submitdata(String plateNumber, String finCode, String car
 
 class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
 
+
   late DataPostModel _dataPostModel;
  // late Link _link;
   TextEditingController regController =  TextEditingController();
@@ -70,7 +76,7 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
 
  //TextEditingController linkController = TextEditingController();
 
-  // final databaseRef = FirebaseDatabase.instance.reference();
+   //final databaseRef = FirebaseDatabase.instance.reference();
 
 
   @override

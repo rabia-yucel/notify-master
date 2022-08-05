@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:share/share.dart';
 import '../../models/dashboard_notification_model.dart';
 import '../../service/session_data_manager.dart';
 import '../../utils/constant.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   List<DashboardNotificationsModel> dashboardNotificationsModelList = List<DashboardNotificationsModel>.empty(growable: true);
-
 
   @override
 
@@ -61,10 +58,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
 
-
       onRefresh: () { return loadNotificationData(); },
       color: primaryColor,
-
       /*child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),*/
       child: Container(
@@ -72,12 +67,9 @@ class _HomePageState extends State<HomePage> {
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
         decoration: pageTopDecoration,
-
       ),
-
-
+      //),
     );
-
   }
   ListView buildNotificationList() {
     return ListView.builder(
@@ -94,10 +86,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> loadNotificationData() async {
 
-   dashboardNotificationsModelList.clear();
-
-
-
+    dashboardNotificationsModelList.clear();
 
     await FirebaseFirestore.instance
         .collection('user_notifications')
@@ -112,14 +101,12 @@ class _HomePageState extends State<HomePage> {
         await FirebaseFirestore.instance
             .collection('notification_messages')
             .where('message_id', isEqualTo: docUN['message_id'])
-            //.orderBy('instance_time', descending: false)
             .get()
             .then((QuerySnapshot querySnapshotNM) {
           querySnapshotNM.docs.forEach((docNM) async {
 
             DashboardNotificationsModel dashboardNotificationsModel =
             DashboardNotificationsModel(
-             // id: docUN['id'],
               messageId: docUN['message_id'],
               avatar: docNM['avatar'],
               name: docNM['title'],
@@ -132,15 +119,12 @@ class _HomePageState extends State<HomePage> {
 
             setState(() {
               dashboardNotificationsModelList.add(dashboardNotificationsModel);
-              //dashboardNotificationsModelList.sort((a, b) => b.instanceTime.compareTo(a.instanceTime));
             });
-
           });
           dashboardNotificationsModelList.sort((a, b) => b.instanceTime.compareTo(a.instanceTime));
         });
       });
     });
-   // dashboardNotificationsModelList.sort((a, b) => b.instanceTime.compareTo(a.instanceTime));
 
   }
 
@@ -185,194 +169,186 @@ class _HomePageState extends State<HomePage> {
       elevation: 0.4,
       shadowColor: primaryColor,
       child: SizedBox(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                             CircleAvatar(
-                                radius: 20,
-                                backgroundImage: NetworkImage(data.avatar),
-                              ),
-
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    data.name,
-
-                                    style: textStyle2.copyWith(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    showTimeDifference(data.instanceTime.toDate()),
-                                    style: textStyle3,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              data.avatar,
+                            ),
+                            radius: 22,
+                          ),
+                          const SizedBox(
+                            width: 20,
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              data.isRead == false
-                                  ? Row(
-                                children: [
-                                  const CircleAvatar(
-                                    backgroundColor: fourthColor,
-                                    radius: 4,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    'New',
-                                    style: textStyle3.copyWith(
-                                        color: primaryColor),
-                                  ),
-                                ],
-                              )
-                                  :
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Stack(
-                                    children: const [
-                                      Icon(
-                                        Icons.check,
-                                        size: 20,
-                                        color: fifthColor,
-                                      ),
-                                      Positioned(
-                                          left: 5,
-                                          child: Icon(
-                                            Icons.check,
-                                            size: 20,
-                                            color: fifthColor,
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 4,
+                              Text(
+                                data.name,
+
+                                style: textStyle2.copyWith(
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                data.instanceTime.toDate().toString().substring(0, 10),
+                                showTimeDifference(data.instanceTime.toDate()),
                                 style: textStyle3,
                               ),
                             ],
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      data.image != ''
-                          ? Image(image: NetworkImage(data.image))
-                          : Container(),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: SelectableText(
-                            data.messageText,
-                            style: textStyle2.copyWith(fontSize: 15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          data.isRead == false
+                              ? Row(
+                            children: [
+                              const CircleAvatar(
+                                backgroundColor: fourthColor,
+                                radius: 4,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'New',
+                                style: textStyle3.copyWith(
+                                    color: primaryColor),
+                              ),
+                            ],
+                          )
+                              :
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Stack(
+                                children: const [
+                                  Icon(
+                                    Icons.check,
+                                    size: 20,
+                                    color: fifthColor,
+                                  ),
+                                  Positioned(
+                                      left: 5,
+                                      child: Icon(
+                                        Icons.check,
+                                        size: 20,
+                                        color: fifthColor,
+                                      )),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            data.instanceTime.toDate().toString().substring(0, 10),
+                            style: textStyle3,
+                          ),
+                        ],
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: tertiaryColor)),
-                        child: IconButton(
-                          onPressed: () { updateNotificationAsDeleted(data); },
-                          icon: const Icon(
-                            CupertinoIcons.delete,
-                            color: primaryColor,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: tertiaryColor)),
-                        child: IconButton(
-                          onPressed: () {
-                            _onShare(context, data.messageText);
-                          },
-                          icon: const Icon(
-                            CupertinoIcons.share,
-                            color: primaryColor,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      data.isRead == true
-                          ? Container()
-                          : Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: tertiaryColor)),
-                        child: IconButton(
-                          onPressed: () { updateNotificationAsRead(data);  },
-                          icon: const Icon(
-                            CupertinoIcons.check_mark,
-                            color: primaryColor,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
+                  data.image != ''
+                      ? Image(image: NetworkImage(data.image))
+                      : Container(),
+                  const SizedBox(
+                    height: 5,
                   ),
-
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SelectableText(
+                        data.messageText,
+                        style: textStyle2.copyWith(fontSize: 15),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-
-
-            ),
-
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: tertiaryColor)),
+                    child: IconButton(
+                      onPressed: () { updateNotificationAsDeleted(data); },
+                      icon: const Icon(
+                        CupertinoIcons.delete,
+                        color: primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: tertiaryColor)),
+                    child: IconButton(
+                      onPressed: () {
+                        _onShare(context, data.messageText);
+                      },
+                      icon: const Icon(
+                        CupertinoIcons.share,
+                        color: primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  data.isRead == true
+                      ? Container()
+                      : Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: tertiaryColor)),
+                    child: IconButton(
+                      onPressed: () { updateNotificationAsRead(data);  },
+                      icon: const Icon(
+                        CupertinoIcons.check_mark,
+                        color: primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -416,7 +392,4 @@ class _HomePageState extends State<HomePage> {
   _onShare(BuildContext context, String shareText) async {
     await Share.share(shareText);
   }
-
-
-
 }
