@@ -294,7 +294,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                   .catchError((error) => print("Failed to update user: $error"));
 
               SessionDataManager.setAllowBankNotifications(userDoc.get('allow_bank_notifications'));
-              SessionDataManager.setAllowMerchantNotifications(userDoc.get('allow_merchant_notifications'));
+             SessionDataManager.setAllowMerchantNotifications(userDoc.get('allow_merchant_notifications'));
             }
 
             SessionDataManager.setUserId(user.uid);

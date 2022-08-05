@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -64,6 +65,7 @@ Future<DataPostModel?> submitdata(String plateNumber, String finCode, String car
 
 class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
 
+
   late DataPostModel _dataPostModel;
  // late Link _link;
   TextEditingController regController =  TextEditingController();
@@ -74,7 +76,7 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
 
  //TextEditingController linkController = TextEditingController();
 
-  // final databaseRef = FirebaseDatabase.instance.reference();
+   //final databaseRef = FirebaseDatabase.instance.reference();
 
 
   @override

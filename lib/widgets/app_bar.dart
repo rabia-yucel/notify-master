@@ -72,16 +72,7 @@ getAppBar3(text) {
           color: secondaryColor,
         ),
       ),
-       IconButton(
-        onPressed: () {
-          Get.to(() => const Filters());
-        },
-        icon: const Icon(
-          Icons.filter,
-          color: secondaryColor,
-        ),
-        alignment: Alignment.centerLeft,
-      ),
+
 
       const SizedBox(
         width: 10,
