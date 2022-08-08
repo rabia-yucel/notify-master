@@ -1,3 +1,7 @@
+// import 'dart:html';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +13,7 @@ import '../../service/session_data_manager.dart';
 import '../../utils/constant.dart';
 
 class HomePage extends StatefulWidget {
+
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -17,8 +22,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<DashboardNotificationsModel> dashboardNotificationsModelList = List<DashboardNotificationsModel>.empty(growable: true);
 
+  final List<String> items = [
+    'PashaBank',
+    'Azericard',
+    'iş bank',
+    'ExpressBank',
+  ];
+
+
+  List<DashboardNotificationsModel> dashboardNotificationsModelList = List<DashboardNotificationsModel>.empty(growable: true);
   @override
 
   void initState() {
@@ -54,36 +67,9 @@ class _HomePageState extends State<HomePage> {
       'tokens': FieldValue.arrayUnion([token]),
     });
   }
+
   @override
-  Widget build(BuildContext context) {
-    return RefreshIndicator(
-
-      onRefresh: () { return loadNotificationData(); },
-      color: primaryColor,
-      /*child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),*/
-      child: Container(
-        child: buildNotificationList(),
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        decoration: pageTopDecoration,
-      ),
-      //),
-    );
-  }
-  ListView buildNotificationList() {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: dashboardNotificationsModelList.length,
-      itemBuilder: (BuildContext context, int index) =>
-          buildDashboardMessageNotifications(
-            context,
-            dashboardNotificationsModelList[index],
-          ),
-    );
-  }
-
+  String selectedValue ='PashaBank';
   Future<void> loadNotificationData() async {
 
     dashboardNotificationsModelList.clear();
@@ -101,20 +87,22 @@ class _HomePageState extends State<HomePage> {
         await FirebaseFirestore.instance
             .collection('notification_messages')
             .where('message_id', isEqualTo: docUN['message_id'])
+            .where('topic',isEqualTo:'$selectedValue')
             .get()
             .then((QuerySnapshot querySnapshotNM) {
           querySnapshotNM.docs.forEach((docNM) async {
 
             DashboardNotificationsModel dashboardNotificationsModel =
             DashboardNotificationsModel(
-              messageId: docUN['message_id'],
-              avatar: docNM['avatar'],
-              name: docNM['title'],
-              instanceTime: docUN['instance_time'],
-              image: docNM['image'],
-              messageText: docNM['body'],
-              isRead: docUN['is_read'],
-              isDeleted: docUN['is_deleted'],
+                messageId: docUN['message_id'],
+                avatar: docNM['avatar'],
+                name: docNM['title'],
+                instanceTime: docUN['instance_time'],
+                image: docNM['image'],
+                messageText: docNM['body'],
+                isRead: docUN['is_read'],
+                isDeleted: docUN['is_deleted'],
+                topic: docNM['topic']
             );
 
             setState(() {
@@ -127,6 +115,77 @@ class _HomePageState extends State<HomePage> {
     });
 
   }
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+
+      onRefresh: () { return loadNotificationData(); },
+      color: primaryColor,
+      /*child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),*/
+      child: Column(
+        children: [
+          Container(
+           child: DropdownButton2(
+             hint: Text(
+               '$selectedValue',
+               style: TextStyle(
+                 fontSize: 14,
+                 color: Theme
+                     .of(context)
+                     .hintColor,
+               ),
+             ),
+             items: items
+                 .map((item) =>
+                 DropdownMenuItem<String>(
+                   value: item,
+                   child: Text(
+                     item,
+                     style: const TextStyle(
+                       fontSize: 14,
+                     ),
+                   ),
+                 ))
+                 .toList(),
+             value: selectedValue,
+             onChanged: (value) {
+
+               setState(() {
+                 selectedValue = value as String;
+               });
+             },
+             buttonHeight: 40,
+             buttonWidth: 140,
+             itemHeight: 40,
+           ),
+          ),
+          Expanded(
+            child: Container(
+              child: buildNotificationList(),
+              height: MediaQuery.of(context).size.height,
+              width: double.infinity,
+              decoration: pageTopDecoration,
+            ),
+          ),
+        ],
+      ),
+      //),
+    );
+  }
+  ListView buildNotificationList() {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: dashboardNotificationsModelList.length,
+      itemBuilder: (BuildContext context, int index) =>
+          buildDashboardMessageNotifications(
+            context,
+            dashboardNotificationsModelList[index],
+          ),
+    );
+  }
+
+
 
   String showTimeDifference(DateTime dateTime) {
     String timeDifference = '';
@@ -159,6 +218,7 @@ class _HomePageState extends State<HomePage> {
 
     return timeDifference + ' ago';
   }
+
 
   buildDashboardMessageNotifications(BuildContext context, DashboardNotificationsModel data) {
     return data.isDeleted == true

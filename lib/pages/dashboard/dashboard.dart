@@ -10,6 +10,8 @@ import 'package:notify/utils/constant.dart';
 import 'package:notify/widgets/app_bar.dart';
 import 'package:share/share.dart';
 
+
+
 // Dashboard with List View notifications
 
 class Dashboard extends StatefulWidget {
@@ -19,6 +21,10 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
+// class _DashboardDropdown extends State<Dashboard>
+// {
+//
+// }
 class _DashboardState extends State<Dashboard> {
 
 
@@ -30,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
       backgroundColor: primaryColor,
-      appBar: getAppBar3('Dashboard'),
+      appBar: getAppBar3('Dashboard2'),
 
       body: getBody(context),
     );
