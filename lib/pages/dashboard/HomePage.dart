@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+  String selectedValue ='PashaBank';
 
   final List<String> items = [
     'PashaBank',
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  String selectedValue ='PashaBank';
+
   Future<void> loadNotificationData() async {
 
     dashboardNotificationsModelList.clear();
@@ -116,6 +116,7 @@ class _HomePageState extends State<HomePage> {
 
   }
   Widget build(BuildContext context) {
+
     return RefreshIndicator(
 
       onRefresh: () { return loadNotificationData(); },
@@ -152,6 +153,7 @@ class _HomePageState extends State<HomePage> {
 
                setState(() {
                  selectedValue = value as String;
+                 loadNotificationData();
                });
              },
              buttonHeight: 40,
