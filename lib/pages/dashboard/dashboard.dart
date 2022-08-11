@@ -36,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
       backgroundColor: primaryColor,
-      appBar: getAppBar3('Dashboard2'),
+      appBar: getAppBar3('Dashboard'),
 
       body: getBody(context),
     );
