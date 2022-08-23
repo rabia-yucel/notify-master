@@ -20,7 +20,7 @@ class RealTimeDbInsert extends StatefulWidget {
 }
 
 Future<DataPostModel?> submitdata(String plateNumber, String finCode,
-    String carCertificateCode, String mobilePhone, String email) async {
+    String carCertificateCode, String mobilePhone) async {
   //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
   //var response = await http.post(Uri.https('iwork.btarge.com','api/AccountApi/CreateInsuranceContract'),
 
@@ -36,7 +36,7 @@ Future<DataPostModel?> submitdata(String plateNumber, String finCode,
         "finCode": finCode,
         "carCertificateCode": carCertificateCode,
         "mobilePhone": mobilePhone,
-        "email": email
+        //"email": email
       }));
   var data = response.body;
   print(data);
@@ -56,7 +56,7 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
   TextEditingController numberController = TextEditingController();
   TextEditingController finController = TextEditingController();
   TextEditingController phoneControoler = TextEditingController();
-  TextEditingController mailController = TextEditingController();
+  // TextEditingController mailController = TextEditingController();
 
   //TextEditingController linkController = TextEditingController();
 
@@ -113,15 +113,15 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
                       labelStyle: GoogleFonts.oswald(fontSize: 20),
                     ),
                   ),
-                  SizedBox(height: 15),
-                  TextFormField(
+                  //SizedBox(height: 15),
+                  /*TextFormField(
                     controller: mailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                       labelStyle: GoogleFonts.oswald(fontSize: 20),
                     ),
-                  ),
+                  ),*/
                   SizedBox(height: 50),
 
                   /* TextFormField(
@@ -139,8 +139,7 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
                       if (regController.text.isNotEmpty &&
                           numberController.text.isNotEmpty &&
                           finController.text.isNotEmpty &&
-                          phoneControoler.text.isNotEmpty &&
-                          mailController.text.isNotEmpty) {
+                          phoneControoler.text.isNotEmpty) {
                         String carCertificateCode =
                             regController.text; // sonra elave olunan
                         String plateNumber =
@@ -149,13 +148,13 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
                             finController.text; // sonra elave olunan
                         String mobilePhone =
                             phoneControoler.text; // sonra elave olunan
-                        String email = mailController.text;
+                        //String email = mailController.text;
 
                         regController.clear();
                         numberController.clear();
                         finController.clear();
                         phoneControoler.clear();
-                        mailController.clear();
+                        //mailController.clear();
 
                         Fluttertoast.showToast(
                             msg: "Tələbiniz qeydə alındı!.",
@@ -166,12 +165,8 @@ class _RealTimeDbInsertState extends State<RealTimeDbInsert> {
                             textColor: Colors.white,
                             fontSize: 20.0);
 
-                        DataPostModel data = submitdata(
-                            plateNumber,
-                            finCode,
-                            carCertificateCode,
-                            mobilePhone,
-                            email) as DataPostModel;
+                        DataPostModel data = submitdata(plateNumber, finCode,
+                            carCertificateCode, mobilePhone) as DataPostModel;
 
                         setState(() {
                           _dataPostModel = data;

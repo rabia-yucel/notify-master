@@ -10,7 +10,6 @@ import 'package:notify/pages/login.dart';
 import 'package:notify/pages/splash.dart';
 import 'package:notify/service/notification_data_manager.dart';
 
-
 import 'firebase_options.dart';
 
 /* testbr ?test ho;m1br;m2bfdfdfdfdfdfdskflkdsflkdsfjlkdsfjdsr gfgfgf
@@ -36,29 +35,23 @@ Future<void> main() async {
 
   await GetStorage.init();
 
-
   // Set the background messaging handler early on, as a named top-level function
- // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  FirebaseMessaging.instance
-      .getInitialMessage()
-      .then((RemoteMessage? message) {
-      if (message != null) {
-          NotificationDataManager.saveNotification(message, "getInitialMessage");
-      }
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    if (message != null) {
+      NotificationDataManager.saveNotification(message, "getInitialMessage");
+    }
   });
-
 
   await initalizeCloudMessaging();
 
   FirebasePerformance performance = FirebasePerformance.instance;
 
   runApp(const MyApp());
-
 }
 
 Future<void> initalizeCloudMessaging() async {
-
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   NotificationSettings settings = await messaging.requestPermission(
@@ -103,15 +96,12 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(),
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/splash',
+      initialRoute: '/dashboard',
       routes: {
         '/splash': (context) => const Splash(),
         '/login': (context) => const Login(),
         '/dashboard': (context) => const Dashboard(),
       },
     );
-
   }
 }
-
-

@@ -141,6 +141,7 @@ class _HomePageState extends State<HomePage> {
               value: selectedValue,
               onChanged: (value) {
                 setState(() {
+
                   selectedValue = value as String;
                 });
               },

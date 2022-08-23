@@ -68,6 +68,7 @@ exports.sendNotification = functions.firestore.document('/notification_messages/
     const phone_number = snap.data().phone_number;
     const avatar = snap.data().avatar;
     const image = snap.data().image;
+    ///gdgghdfdjhfjhdfdfhdjhghdhdjfjhuhrrjhiuiryuru
 
     // Access the parameter `{documentId}` with `context.params`
     functions.logger.log('Sending notification', context.params.documentId, phone_number);
