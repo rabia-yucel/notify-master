@@ -1,8 +1,9 @@
 import 'dart:convert';
 
- import 'dart:convert';
+import 'dart:convert';
 
-DataPostModel dataPostModelFromJson(String str) => DataPostModel.fromJson(json.decode(str));
+DataPostModel dataPostModelFromJson(String str) =>
+    DataPostModel.fromJson(json.decode(str));
 
 String dataPostModelToJson(DataPostModel data) => json.encode(data.toJson());
 
@@ -12,33 +13,33 @@ class DataPostModel {
     required this.finCode,
     required this.carCertificateCode,
     required this.mobilePhone,
-    required this.email,
+    //required this.email,
   });
 
   String plateNumber;
   String finCode;
   String carCertificateCode;
   String mobilePhone;
-  String email;
+  //String email;
 
   factory DataPostModel.fromJson(Map<String, dynamic> json) => DataPostModel(
-    plateNumber: json["PlateNumber"],
-    finCode: json["FinCode"],
-    carCertificateCode: json["CarCertificateCode"],
-    mobilePhone: json["MobilePhone"],
-    email: json["Email"],
-  );
+        plateNumber: json["PlateNumber"],
+        finCode: json["FinCode"],
+        carCertificateCode: json["CarCertificateCode"],
+        mobilePhone: json["MobilePhone"],
+        // email: json["Email"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "PlateNumber": plateNumber,
-    "FinCode": finCode,
-    "CarCertificateCode": carCertificateCode,
-    "MobilePhone": mobilePhone,
-    "Email": email,
-  };
+        "PlateNumber": plateNumber,
+        "FinCode": finCode,
+        "CarCertificateCode": carCertificateCode,
+        "MobilePhone": mobilePhone,
+        // "Email": email,
+      };
 }
 
- /*class DataPostModel {
+/*class DataPostModel {
 
 
   String? PlateNumber;
