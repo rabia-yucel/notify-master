@@ -87,7 +87,7 @@ exports.sendNotification = functions.firestore.document('/notification_messages/
     };
 
 
-    if ((phone_number !== null) && (phone_number !== '')) {
+    if ((phone_number !== null) && (phone_number !== ''))
 
           var instance_time = admin.firestore.FieldValue.serverTimestamp();
 
