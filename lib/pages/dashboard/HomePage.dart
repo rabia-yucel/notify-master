@@ -21,11 +21,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<String> items = [
-    'PashaBank',
-    'Azericard',
-    'iş bank',
-    'ExpressBank',
+    // 'PashaBank',
+    // 'Azericard',
+    // 'iş bank',
+    // 'ExpressBank',
   ];
+  String selectedValue = '';
 
   List<DashboardNotificationsModel> dashboardNotificationsModelList =
       List<DashboardNotificationsModel>.empty(growable: true);
@@ -37,7 +38,37 @@ class _HomePageState extends State<HomePage> {
     saveTokenValue();
 
     loadNotificationData();
+
+    ///pull data from firebase and add to list
+    // SenderData();
   }
+
+  ///add senders name from firebase to list
+  // Future<void> SenderData() async {
+  //   final firebase = await FirebaseFirestore.instance;
+  //   CollectionReference collectionReferencesender =
+  //       firebase.collection('sender');
+  //   QuerySnapshot snapshot =
+  //       collectionReferencesender.get() as QuerySnapshot<Object?>;
+  //   List<DocumentSnapshot> docs = snapshot.docs;
+  //   docs.forEach((element) {
+  //     setState(() {
+  //       items.add(element.data()['name']);
+  //     });
+  //   });
+  // }
+
+  // void SenderData() async {
+  //   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  //   final CollectionReference _mainCollection = _firestore.collection('sender');
+  //
+  //   await _mainCollection.get().then((QuerySnapshot querySnapshot) {
+  //     querySnapshot.docs.forEach((doc) {
+  //       var document = doc.data();
+  //       items.add(document['name']);
+  //     });
+  //   });
+  // }
 
   Future<void> saveTokenValue() async {
     // Get the token each time the application loads
@@ -65,7 +96,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  String selectedValue = 'PashaBank';
   Future<void> loadNotificationData() async {
     dashboardNotificationsModelList.clear();
 
@@ -128,20 +158,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               items: items
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
+                  .map(
+                    (item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          fontSize: 14,
                         ),
-                      ))
+                      ),
+                    ),
+                  )
                   .toList(),
               value: selectedValue,
               onChanged: (value) {
                 setState(() {
-
                   selectedValue = value as String;
                 });
               },
